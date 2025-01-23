@@ -12,6 +12,9 @@ class MarkersNotifier extends StateNotifier<List<CustomMarker>> {
   Future<void> addMarker(CustomMarker marker) async {
     state = [...state, marker];
   }
+  void refreshMarkers() {
+    state = [...state];
+  }
 
   void removeMarker(String id) {
     state = state.where((marker) => marker.id != id).toList();

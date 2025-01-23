@@ -26,9 +26,13 @@ class _InteractiveMapScreenState extends ConsumerState<InteractiveMapScreen> {
   void initState() {
     super.initState();
     _markers = [];
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _updateMarkers();
-    });
+    // Escuchar cambios en los marcadores
+    ref.listenManual(
+        markersProvider,
+            (previous, next) {
+          _updateMarkers();
+        }
+    );
   }
 
   void _updateMarkers() {
@@ -102,11 +106,15 @@ class _InteractiveMapScreenState extends ConsumerState<InteractiveMapScreen> {
       body: Stack(
         children: [
           _buildMap(markers),
-          const Positioned(
+          Positioned(
             top: 40,
             left: 20,
             right: 20,
-            child: MapSearchBar(),
+            child: MapSearchBar(
+              onLocationSelected: (lat, lng) {
+                _mapController.move(LatLng(lat, lng), 15.0);
+              },
+            ),
           ),
         ],
       ),

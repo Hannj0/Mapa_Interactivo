@@ -10,5 +10,5 @@ class MapConstants {
       'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}';
   static const userAgentPackageName = 'MAPBOX_ACCESS_TOKEN';
   static const mapboxStyleId = 'mapbox/streets-v12';
-  static const mapboxAccessToken= "--";
+  static const mapboxAccessToken= "pk.eyJ1IjoiaGFubmpvIiwiYSI6ImNtNjVnMjlsaTF2OXIyanEzem5mMHo2b3EifQ.ISX_o6fIZ-uExiVEQAzePw";
 }
