@@ -24,15 +24,21 @@ Mapa interactivo, agregar marcadores con informacion y busqueda de ubicaciones
 1. Pantalla Principal: Mapa Interactivo
    o Muestra un mapa interactivo utilizando mapbox.
    o Permite al usuario hacer zoom y desplazarse por el mapa.
+![img_1.png](img_1.png)
 2. Agrega marcadores
    o Al mantener presionada una ubicación en el mapa, agrega un marcador en esa posición.
    o Muestra un cuadro de diálogo (AlertDialog) para que el usuario asigne un nombre al marcador.
+![img_2.png](img_2.png)
 3. Lista de Marcadores
    o Al presionar el botón flotante muestra una lista de los marcadores guardados en un cuadro emergente.
-   o Al seleccionar un marcador de la lista, el mapa redirige a la ubicación del marcador
+   o Al seleccionar un marcador de la lista, el mapa redirige a la ubicación del marcador.
+   o Al pulsar el icono de lápiz, permite la edición del nombre del marcador.
+   o Al pulsar el icono de papelera, permite la eliminación del marcador.
+![img_3.png](img_3.png)
 4. Búsqueda de ubicaciones
    o Cuenta con una barra de búsqueda que permita al usuario buscar ubicaciones por nombre.
    o Centra el mapa en la ubicación encontrada y agrega un marcador automáticamente.
+![img_4.png](img_4.png) ![img_5.png](img_5.png)
 5. Persistencia de datos
    o Almacena con hive los marcadores de forma persistente para que estén disponibles al cerrar y reabrir la aplicación.
 
