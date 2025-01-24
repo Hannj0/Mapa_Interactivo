@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/models/marker_model.dart';
 import '../providers/markers_provider.dart';
+import 'delete_marker.dart';
+import 'edit_marker.dart';
 
 void showMarkersListBottomSheet({
   required BuildContext context,
@@ -56,6 +58,23 @@ class MarkersListView extends ConsumerWidget {
                   subtitle: Text(
                     'Lat: ${marker.latitude.toStringAsFixed(4)}, '
                         'Lng: ${marker.longitude.toStringAsFixed(4)}',
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          showEditMarkerDialog(context, marker);
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          showDeleteMarkerDialog(context, marker);
+                        },
+                      ),
+                    ],
                   ),
                   onTap: () => onMarkerSelected(marker),
                 );

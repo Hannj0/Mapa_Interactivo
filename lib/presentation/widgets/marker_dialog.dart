@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 Future<String?> showAddMarkerDialog(BuildContext context) async {
   final TextEditingController controller = TextEditingController();
   return showDialog<String>(
@@ -15,7 +13,7 @@ Future<String?> showAddMarkerDialog(BuildContext context) async {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, null), // Cancelar
+            onPressed: () => Navigator.pop(context, null),
             child: const Text('Cancelar'),
           ),
           TextButton(

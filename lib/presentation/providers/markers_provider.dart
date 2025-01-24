@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import '../../core/constants/boxes.dart';
 import '../../data/models/marker_model.dart';
 
 final markersProvider = StateNotifierProvider<MarkersNotifier, List<CustomMarker>>((ref) {
@@ -7,22 +8,38 @@ final markersProvider = StateNotifierProvider<MarkersNotifier, List<CustomMarker
 });
 
 class MarkersNotifier extends StateNotifier<List<CustomMarker>> {
-  MarkersNotifier() : super([]);
+  MarkersNotifier() : super([]) {
+    _loadMarkers();
+  }
+
+  Future<void> _loadMarkers() async {
+    final box = await Hive.openBox<CustomMarker>(BoxesConstants.marketlistBox);
+    state = box.values.toList();
+  }
 
   Future<void> addMarker(CustomMarker marker) async {
+    final box = await Hive.openBox<CustomMarker>(BoxesConstants.marketlistBox);
+    await box.add(marker);
     state = [...state, marker];
   }
-  void refreshMarkers() {
-    state = [...state];
-  }
 
-  void removeMarker(String id) {
+  Future<void> removeMarker(String id) async {
+    final box = await Hive.openBox<CustomMarker>(BoxesConstants.marketlistBox);
+    final markerToDelete = box.values.firstWhere((m) => m.id == id);
+    await markerToDelete.delete();
     state = state.where((marker) => marker.id != id).toList();
   }
 
-  void updateMarker(CustomMarker updatedMarker) {
-    state = state.map((marker) =>
-    marker.id == updatedMarker.id ? updatedMarker : marker
-    ).toList();
+  Future<void> updateMarker(CustomMarker updatedMarker) async {
+    final box = await Hive.openBox<CustomMarker>(BoxesConstants.marketlistBox);
+    final index = state.indexWhere((m) => m.id == updatedMarker.id);
+    if (index != -1) {
+      await box.putAt(index, updatedMarker);
+      state = [
+        ...state.sublist(0, index),
+        updatedMarker,
+        ...state.sublist(index + 1)
+      ];
+    }
   }
 }

@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'data/models/marker_model.dart';
 import 'presentation/screens/interactive_map.dart';
 
-void main() {
+void main() async {
+  // Inicializar Hive
+  await Hive.initFlutter();
+
+  // Registrar el adaptador de marcadores
+  Hive.registerAdapter(CustomMarkerAdapter());
+
+  // Envolver la aplicación con ProviderScope
   runApp(
-    const ProviderScope(
+    // Añadir ProviderScope aquí
+    ProviderScope(
       child: MyApp(),
     ),
   );
